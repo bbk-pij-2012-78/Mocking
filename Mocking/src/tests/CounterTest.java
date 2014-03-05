@@ -10,13 +10,37 @@ public class CounterTest {
 	@Test
 	public void test() {
 		
-		Integer first;
+		Integer first,mockedFirst;
+		
+		Counter count = new Counter();
+		
+		Counter mockedCounter = mock(Counter.class);
+		when(mockedCounter.getValue()).thenReturn(1);
+		
+		first = count.getValue();
+		mockedFirst = mockedCounter.getValue();
+		
+		assertEquals("Wrong Answer!", first, mockedFirst);
+	}	
+
+	@Test
+	public void test2() {
+		
+		Integer first,mockedFirst;
 		Integer expectedFirst = 1;
 		
 		Counter count = new Counter();
 		
-		first = count.getValue();
+		Counter mockedCounter = mock(Counter.class);
+		when(mockedCounter.getValue()).thenReturn(2);
 		
-		assertEquals("Wrong Answer!", expectedFirst, first);
-	}	
+		first = count.getValue();
+		mockedFirst = mockedCounter.getValue();
+		
+		assertEquals("Wrong Answer!", first, expectedFirst);
+		
+		first = count.getValue();mockedFirst = mockedCounter.getValue();
+		
+		assertEquals("Wrong Answer!", first, mockedFirst);
+	}
 }
